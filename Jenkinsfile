@@ -1,4 +1,4 @@
-flag = true
+flag = false
 pipeline {
     agent any
     environment {
@@ -8,20 +8,20 @@ pipeline {
         stage('Setup') {
             steps {
                 echo 'Setting up environment...'
-                sh 'python3 -m venv venv'
-                sh '. venv/bin/activate'
+                bat 'python -m venv venv'
+                bat 'venv\\Scripts\\activate'
             }
         }
         stage('Install Dependencies') {
             steps {
                 echo 'Installing dependencies...'
-                sh 'pip install -r requirements.txt'
+                bat 'pip install -r requirements.txt'
             }
         }
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'python app.py &'
+                bat 'start /B python app.py'
             }
         }
         stage('Test') {
@@ -29,8 +29,8 @@ pipeline {
                 script {
                     if (flag == false) {
                         echo 'Testing...'
-                        // Add your testing commands, e.g., pytest or other test runner
-                        sh 'pytest'
+                        // Adjust the testing command according to your setup
+                        bat 'pytest'
                     }
                 }
             }
@@ -38,10 +38,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                // Assuming deployment to a local or remote server, use appropriate commands
-                sh 'pkill python' // Optionally stop the current running app
-                sh 'nohup python app.py &'
+                bat 'taskkill /IM python.exe /F'
+                bat 'start /B python app.py'
             }
         }
     }
 }
+
