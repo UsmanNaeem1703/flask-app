@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        /* Background image at the top */
+        .header-background {
+            height: 250px;
+            background-image: url('https://nu.edu.pk/Content/images/Slider/adm-sp-2022-2.jpg');
+            /* Use the actual background image here */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Profile picture styling */
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            object-fit: cover;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Main content below profile picture */
+        .content-section {
+            padding-top: 120px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .info-section {
+            margin-top: 20px;
+        }
+
+        .info-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p,
+        .skills-section p,
+        .links-section p {
+            font-size: 1rem;
+        }
+
+        /* Follow and Settings buttons (optional, customizable) */
+        .action-buttons {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .action-buttons .btn {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid container">
+            <a class="navbar-brand" href="#">Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/create-portfolio">Create Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">View Portfolios</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background Header Image -->
+    <div class="header-background"></div>
+
+    <!-- Profile Section -->
+    <div class="container">
+        <div class="text-center">
+            {% if person.picture %}
+            <img src="{{ url_for('static', filename=person.picture.split('static/')[-1].replace('\\', '/')) }}"
+                alt="Profile Picture" class="profile-picture">
+            {% else %}
+            <img src="https://th.bing.com/th/id/R.6b0022312d41080436c52da571d5c697?rik=ejx13G9ZroRrcg&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fuser-png-icon-young-user-icon-2400.png&ehk=NNF6zZUBr0n5i%2fx0Bh3AMRDRDrzslPXB0ANabkkPyv0%3d&risl=&pid=ImgRaw&r=0"
+                alt="Profile Picture" class="profile-picture">
+            {% endif %}
+        </div>
+
+        <!-- Name, Bio, and Action Buttons -->
+        <div class="content-section text-center">
+            <h1>{{ person.first_name }} {{ person.last_name }}</h1>
+            <p class="bio text-justify">{{ person.bio }}</p>
+        </div>
+        <!-- Download Portfolio Link -->
+        <div class="row info-section">
+            <div class="col-md-12 text-center">
+                <a href="{{ url_for('download_portfolio', id=person.id) }}" class="btn btn-primary">Download PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+
+</body>
+
+</html>
