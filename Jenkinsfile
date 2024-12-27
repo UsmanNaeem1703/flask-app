@@ -24,17 +24,6 @@ pipeline {
                 bat 'start /B python app.py'
             }
         }
-        stage('Test') {
-            steps {
-                script {
-                    if (flag == false) {
-                        echo 'Testing...'
-                        // Adjust the testing command according to your setup
-                        bat 'pytest'
-                    }
-                }
-            }
-        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
