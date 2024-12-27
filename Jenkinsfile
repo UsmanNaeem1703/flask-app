@@ -24,6 +24,12 @@ pipeline {
                 bat 'start /B python app.py'
             }
         }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                bat 'venv\\Scripts\\pytest'
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
