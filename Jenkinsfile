@@ -8,7 +8,7 @@ pipeline {
         stage('Setup') {
             steps {
                 echo 'Setting up environment...'
-                bat 'C:\Users\usman\AppData\Local\Microsoft\WindowsApps\python.exe -m venv venv'
+                bat 'python -m venv venv'
                 bat 'venv\\Scripts\\activate'
             }
         }
