@@ -2,3 +2,4 @@ flask
 flask_sqlalchemy
 reportlab
 xhtml2pdf
+pytest
