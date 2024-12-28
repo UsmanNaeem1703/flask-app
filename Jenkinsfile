@@ -27,7 +27,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                bat 'venv\\Scripts\\pytest'
+                bat 'pytest'
             }
         }
         stage('Deploy') {
